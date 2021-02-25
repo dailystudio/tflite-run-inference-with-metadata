@@ -7,7 +7,7 @@ import com.dailystudio.devbricksx.utils.MatrixUtils
 import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteCameraFragment
 import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteImageAnalyzer
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
-import com.dailystudio.tensorflow.lite.viewer.image.classifier.ml.LiteModel
+import com.dailystudio.tflite.example.mlmodelbinding.ml.LiteModelAiyVisionClassifierBirdsV13
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.label.Category
 
@@ -15,9 +15,9 @@ import org.tensorflow.lite.support.label.Category
 class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
     : AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Category>>(rotation, lensFacing) {
 
-    private val classifier: LiteModel? by lazy {
+    private val classifier: LiteModelAiyVisionClassifierBirdsV13? by lazy {
         GlobalContextWrapper.context?.let {
-            LiteModel.newInstance(it)
+            LiteModelAiyVisionClassifierBirdsV13.newInstance(it)
         }
     }
 
