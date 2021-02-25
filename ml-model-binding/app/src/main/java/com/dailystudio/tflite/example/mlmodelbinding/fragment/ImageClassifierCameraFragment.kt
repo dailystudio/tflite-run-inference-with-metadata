@@ -10,6 +10,7 @@ import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tflite.example.mlmodelbinding.ml.LiteModelAiyVisionClassifierBirdsV13
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.label.Category
+import org.tensorflow.lite.support.model.Model
 
 
 class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
@@ -17,7 +18,11 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 
     private val classifier: LiteModelAiyVisionClassifierBirdsV13? by lazy {
         GlobalContextWrapper.context?.let {
-            LiteModelAiyVisionClassifierBirdsV13.newInstance(it)
+            val options = Model.Options.Builder()
+                .setDevice(Model.Device.GPU)
+                .build()
+
+            LiteModelAiyVisionClassifierBirdsV13.newInstance(it, options)
         }
     }
 
