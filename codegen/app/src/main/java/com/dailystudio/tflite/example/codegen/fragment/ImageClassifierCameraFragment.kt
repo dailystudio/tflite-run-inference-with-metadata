@@ -51,12 +51,11 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
                               info: ImageInferenceInfo): List<Pair<String, Float>> {
         val tImage = TensorImage.fromBitmap(inferenceBitmap)
 
-        var categories: MutableList<Pair<String, Float>> =
+        val categories: MutableList<Pair<String, Float>> =
             mutableListOf()
 
         synchronized(lock) {
-            classifier = classifier ?:
-                    createModel(context)
+            classifier = classifier ?: createModel(context)
 
             classifier?.let {
                 val inputs: LiteModelFoodV1.Inputs  = it.createInputs()
