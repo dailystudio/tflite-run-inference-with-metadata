@@ -10,7 +10,7 @@ import com.dailystudio.tflite.example.codegen.fragment.ImageClassifierCameraFrag
 import org.tensorflow.lite.support.label.Category
 import kotlin.math.min
 
-class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Category>>() {
+class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Pair<String, Float>>>() {
 
     companion object {
         const val REPRESENTED_ITEMS_COUNT = 3
@@ -48,12 +48,12 @@ class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Categ
         }
     }
 
-    override fun onResultsUpdated(results: List<Category>) {
+    override fun onResultsUpdated(results: List<Pair<String, Float>>) {
         val itemCount = min(results.size, REPRESENTED_ITEMS_COUNT)
 
         for (i in 0 until itemCount) {
-            detectItemViews[i]?.text = results[i].label
-            detectItemValueViews[i]?.text = "%.1f%%".format(results[i].score * 100)
+            detectItemViews[i]?.text = results[i].first
+            detectItemValueViews[i]?.text = "%.1f%%".format(results[i].second * 100)
         }
     }
 

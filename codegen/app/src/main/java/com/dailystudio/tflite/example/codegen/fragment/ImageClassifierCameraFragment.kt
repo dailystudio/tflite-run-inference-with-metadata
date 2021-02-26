@@ -9,7 +9,7 @@ import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteCameraFragment
 import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteImageAnalyzer
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tensorflow.lite.viewer.ui.InferenceSettingsPrefs
-import com.dailystudio.tflite.example.codegen.ml.LiteModelAiyVisionClassifierBirdsV13
+import com.dailystudio.tflite.example.codegen.LiteModelFoodV1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,12 +20,12 @@ import java.lang.Exception
 
 
 class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
-    : AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Category>>(rotation, lensFacing) {
+    : AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Pair<String, Float>>>(rotation, lensFacing) {
 
-    private var classifier: LiteModelAiyVisionClassifierBirdsV13? = null
+    private var classifier: LiteModelFoodV1? = null
     private var lock = Object()
 
-    private fun getModelOptions(): Model.Options {
+    private fun createModel(context: Context): LiteModelFoodV1 {
         val deviceStr = InferenceSettingsPrefs.instance.device
         val numOfThreads = InferenceSettingsPrefs.instance.numberOfThreads
 
@@ -36,32 +36,37 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
             Model.Device.CPU
         }
 
-        val builder = Model.Options.Builder()
-            .setDevice(device)
-        if (device != Model.Device.GPU) {
-            builder.setNumThreads(numOfThreads)
+        return when (device) {
+            Model.Device.CPU, Model.Device.NNAPI -> {
+                LiteModelFoodV1(context, device, numOfThreads)
+            }
+            Model.Device.GPU -> {
+                LiteModelFoodV1(context, device, 1)
+            }
         }
-
-        Logger.debug("model options: device = $device, numOfThreads = $numOfThreads")
-
-        return builder.build()
     }
 
     override fun analyzeFrame(context: Context,
                               inferenceBitmap: Bitmap,
-                              info: ImageInferenceInfo): List<Category>? {
+                              info: ImageInferenceInfo): List<Pair<String, Float>> {
         val tImage = TensorImage.fromBitmap(inferenceBitmap)
 
-        var categories: MutableList<Category>? = null
+        var categories: MutableList<Pair<String, Float>> =
+            mutableListOf()
 
         synchronized(lock) {
             classifier = classifier ?:
-                    LiteModelAiyVisionClassifierBirdsV13.newInstance(
-                        context, getModelOptions())
+                    createModel(context)
 
-            categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
-                sortByDescending {
-                    it.score
+            classifier?.let {
+                val inputs: LiteModelFoodV1.Inputs  = it.createInputs()
+                inputs.loadImage(tImage)
+
+                val outputs = classifier?.run(inputs)?.probability
+                outputs?.let { map ->
+                    categories.addAll(map.toList().sortedByDescending { pair ->
+                        pair.second
+                    })
                 }
             }
         }
@@ -114,9 +119,9 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 }
 
 class ImageClassifierCameraFragment
-    : AbsTFLiteCameraFragment<ImageInferenceInfo, List<Category>>() {
+    : AbsTFLiteCameraFragment<ImageInferenceInfo, List<Pair<String, Float>>>() {
 
-    override fun createAnalyzer(screenAspectRatio: Int, rotation: Int, lensFacing: Int): AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Category>> {
+    override fun createAnalyzer(screenAspectRatio: Int, rotation: Int, lensFacing: Int): AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Pair<String, Float>>> {
         return ImageClassifierAnalyzer(rotation, lensFacing)
     }
 
