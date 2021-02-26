@@ -4,16 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.dailystudio.devbricksx.settings.AbsSettingsDialogFragment
 import com.dailystudio.tensorflow.lite.viewer.AbsTFLiteModelViewerActivity
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tflite.example.taskapi.fragment.ImageClassifierCameraFragment
+import com.dailystudio.tflite.example.taskapi.fragment.SimpleInferenceSettingsFragment
 import org.tensorflow.lite.support.label.Category
 import kotlin.math.min
 
 class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Category>>() {
 
     companion object {
-        const val REPRESENTED_ITEMS_COUNT = 3
+        const val REPRESENTED_ITEMS_COUNT = 2
     }
 
     private var detectItemViews: Array<TextView?> =
@@ -52,7 +54,7 @@ class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Categ
         val itemCount = min(results.size, REPRESENTED_ITEMS_COUNT)
 
         for (i in 0 until itemCount) {
-            detectItemViews[i]?.text = results[i].label
+            detectItemViews[i]?.text = results[i].displayName
             detectItemValueViews[i]?.text = "%.1f%%".format(results[i].score * 100)
         }
     }
@@ -71,6 +73,10 @@ class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Categ
 
     override fun getViewerAppDesc(): CharSequence? {
         return getString(R.string.app_desc)
+    }
+
+    override fun createSettingsFragment(): AbsSettingsDialogFragment? {
+        return SimpleInferenceSettingsFragment()
     }
 
 }
