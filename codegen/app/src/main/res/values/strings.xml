@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TensorFlow Lite Codegen</string>
+
+    <string name="app_desc">For TensorFlow Lite models enhanced with metadata, developers can use Codegen to automatically generate wrapper library project based on the model metadata. By leveraging the technology, this app is built for a compatible image classification lite model with supported metadata.</string>
+</resources>
