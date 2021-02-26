@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ML Model Binding</string>
+    <string name="app_name">TensorFlow Lite Task API</string>
 
-    <string name="app_desc">For TensorFlow Lite models enhanced with metadata, developers can use ML Model Binding to automatically generate wrapper classes based on the model metadata. By leveraging the technology, this app is built for a compatible image classification lite model with supported metadata.</string>
+    <string name="app_desc">For TensorFlow Lite models enhanced with metadata, developers can use TensorFlow Lite Task API to accelerate the developement. By leveraging the technology, this app is built for a compatible image classification lite model with supported metadata.</string>
 </resources>
