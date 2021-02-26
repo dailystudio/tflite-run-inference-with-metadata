@@ -3,6 +3,8 @@ package com.dailystudio.tflite.example.codegen;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -125,8 +127,9 @@ public class LiteModelFoodV1 {
       probabilityDataType = extractor.getOutputTensorType(0);
       probabilityQuantizationParams = extractor.getOutputTensorQuantizationParams(0);
       String probabilityLabelsFileName =
-          extractor.getOutputTensorMetadata(0).associatedFiles(0).name();
+          extractor.getOutputTensorMetadata(0).associatedFiles(1).name();
       probabilityLabels = FileUtil.loadLabels(extractor.getAssociatedFile(probabilityLabelsFileName));
+      Log.d("MODEL", "probabilityLabels: " + probabilityLabels);
     }
 
     public int[] getImageShape() {
