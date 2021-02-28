@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.codegen
+package com.dailystudio.tflite.example.medata
 
 import org.junit.Test
 

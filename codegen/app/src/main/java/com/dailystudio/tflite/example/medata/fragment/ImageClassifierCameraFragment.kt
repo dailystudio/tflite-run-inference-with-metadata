@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.codegen.fragment
+package com.dailystudio.tflite.example.medata.fragment
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,12 +9,11 @@ import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteCameraFragment
 import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteImageAnalyzer
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tensorflow.lite.viewer.ui.InferenceSettingsPrefs
-import com.dailystudio.tflite.example.codegen.LiteModelFoodV1
+import com.dailystudio.tflite.example.medata.LiteModelFoodV1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.support.model.Model
 import java.lang.Exception
 

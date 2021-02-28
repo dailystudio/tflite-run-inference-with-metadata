@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.codegen
+package com.dailystudio.tflite.example.medata
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.dailystudio.tensorflow.lite.viewer.AbsTFLiteModelViewerActivity
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
-import com.dailystudio.tflite.example.codegen.fragment.ImageClassifierCameraFragment
-import org.tensorflow.lite.support.label.Category
+import com.dailystudio.tflite.example.medata.fragment.ImageClassifierCameraFragment
 import kotlin.math.min
 
 class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Pair<String, Float>>>() {
