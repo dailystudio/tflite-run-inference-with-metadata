@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.taskapi
+package com.dailystudio.tflite.example.metadata
 
 import org.junit.Test
 

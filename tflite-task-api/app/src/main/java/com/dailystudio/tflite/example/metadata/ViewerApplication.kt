@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.taskapi
+package com.dailystudio.tflite.example.metadata
 
 import com.dailystudio.tensorflow.lite.viewer.BaseTFLiteModelViewApplication
 import com.dailystudio.tensorflow.lite.viewer.ui.InferenceSettingsPrefs

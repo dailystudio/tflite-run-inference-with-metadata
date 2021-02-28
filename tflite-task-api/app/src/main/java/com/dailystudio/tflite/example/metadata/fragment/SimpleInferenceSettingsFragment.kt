@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.taskapi.fragment
+package com.dailystudio.tflite.example.metadata.fragment
 
 import android.content.Context
 import com.dailystudio.devbricksx.settings.AbsSetting

@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.taskapi
+package com.dailystudio.tflite.example.metadata
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.dailystudio.devbricksx.settings.AbsSettingsDialogFragment
 import com.dailystudio.tensorflow.lite.viewer.AbsTFLiteModelViewerActivity
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
-import com.dailystudio.tflite.example.taskapi.fragment.ImageClassifierCameraFragment
-import com.dailystudio.tflite.example.taskapi.fragment.SimpleInferenceSettingsFragment
+import com.dailystudio.tflite.example.metadata.fragment.ImageClassifierCameraFragment
+import com.dailystudio.tflite.example.metadata.fragment.SimpleInferenceSettingsFragment
 import org.tensorflow.lite.support.label.Category
 import kotlin.math.min
 

@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.taskapi
+package com.dailystudio.tflite.example.metadata
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
