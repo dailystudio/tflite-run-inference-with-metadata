@@ -1,4 +1,4 @@
-package com.dailystudio.tflite.example.mlmodelbinding.fragment
+package com.dailystudio.tflite.example.metadata.fragment
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,7 +9,7 @@ import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteCameraFragment
 import com.dailystudio.tensorflow.lite.viewer.image.AbsTFLiteImageAnalyzer
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tensorflow.lite.viewer.ui.InferenceSettingsPrefs
-import com.dailystudio.tflite.example.mlmodelbinding.ml.LiteModelAiyVisionClassifierBirdsV13
+import com.dailystudio.tflite.example.metadata.ml.LiteModelAiyVisionClassifierBirdsV13
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
