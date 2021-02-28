@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TensorFlow Lite Metadata</string>
+
+    <string name="app_desc">For TensorFlow Lite models enhanced with metadata, developers have different options to accelerate development of on-device machine learning.</string>
+</resources>
