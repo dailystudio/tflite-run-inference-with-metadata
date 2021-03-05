@@ -7,9 +7,10 @@ import androidx.fragment.app.Fragment
 import com.dailystudio.tensorflow.lite.viewer.AbsTFLiteModelViewerActivity
 import com.dailystudio.tensorflow.lite.viewer.image.ImageInferenceInfo
 import com.dailystudio.tflite.example.medata.fragment.ImageClassifierCameraFragment
+import org.tensorflow.lite.support.label.Category
 import kotlin.math.min
 
-class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Pair<String, Float>>>() {
+class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Category>>() {
 
     companion object {
         const val REPRESENTED_ITEMS_COUNT = 3
@@ -47,12 +48,12 @@ class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Pair<
         }
     }
 
-    override fun onResultsUpdated(results: List<Pair<String, Float>>) {
+    override fun onResultsUpdated(results: List<Category>) {
         val itemCount = min(results.size, REPRESENTED_ITEMS_COUNT)
 
         for (i in 0 until itemCount) {
-            detectItemViews[i]?.text = results[i].first
-            detectItemValueViews[i]?.text = "%.1f%%".format(results[i].second * 100)
+            detectItemViews[i]?.text = results[i].displayName
+            detectItemValueViews[i]?.text = "%.1f%%".format(results[i].score * 100)
         }
     }
 

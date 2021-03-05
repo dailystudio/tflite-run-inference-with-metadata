@@ -14,12 +14,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.support.model.Model
 import java.lang.Exception
 
 
 class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
-    : AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Pair<String, Float>>>(rotation, lensFacing) {
+    : AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Category>>(rotation, lensFacing) {
 
     private var classifier: LiteModelFoodV1? = null
     private var lock = Object()
@@ -47,10 +48,10 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 
     override fun analyzeFrame(context: Context,
                               inferenceBitmap: Bitmap,
-                              info: ImageInferenceInfo): List<Pair<String, Float>> {
+                              info: ImageInferenceInfo): List<Category> {
         val tImage = TensorImage.fromBitmap(inferenceBitmap)
 
-        val categories: MutableList<Pair<String, Float>> =
+        val categories: MutableList<Category> =
             mutableListOf()
 
         synchronized(lock) {
@@ -62,8 +63,10 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 
                 val outputs = classifier?.run(inputs)?.probability
                 outputs?.let { map ->
-                    categories.addAll(map.toList().sortedByDescending { pair ->
-                        pair.second
+                    categories.addAll(map.toList().map { pair ->
+                        Category.create(pair.first, pair.first, pair.second)
+                    }.sortedByDescending { category ->
+                        category.score
                     })
                 }
             }
@@ -117,9 +120,9 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 }
 
 class ImageClassifierCameraFragment
-    : AbsTFLiteCameraFragment<ImageInferenceInfo, List<Pair<String, Float>>>() {
+    : AbsTFLiteCameraFragment<ImageInferenceInfo, List<Category>>() {
 
-    override fun createAnalyzer(screenAspectRatio: Int, rotation: Int, lensFacing: Int): AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Pair<String, Float>>> {
+    override fun createAnalyzer(screenAspectRatio: Int, rotation: Int, lensFacing: Int): AbsTFLiteImageAnalyzer<ImageInferenceInfo, List<Category>> {
         return ImageClassifierAnalyzer(rotation, lensFacing)
     }
 

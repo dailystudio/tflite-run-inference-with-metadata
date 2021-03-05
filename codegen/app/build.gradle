@@ -43,7 +43,6 @@ dependencies {
 
     implementation ('com.dailystudio:tensorflow-lite-viewer:0.1.4') {
         exclude group: 'org.tensorflow', module: 'tensorflow-lite-metadata'
-        exclude group: 'com.google.flatbuffers:', module: 'flatbuffers-java'
     }
     implementation project(":libmodel")
 
