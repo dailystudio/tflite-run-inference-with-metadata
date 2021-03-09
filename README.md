@@ -17,10 +17,10 @@ According to different complexity and requirement, TensorFlow Lite provides seve
 
 ## Directories
 
-- **boilerplate** Project boilerplate. It includes a basic structure of a camera-based TensorFlow Lite application. Developers only need to focus on their specific inference codes without any knowledge about the rest parts of the app.
-- **ml-model-binding** Complete source codes of a bird recognition application. It demonstrates how to use ML Model Binding with TensorFlow Lite models. 
-- **codegen** Complete source codes of a food recognition application. It demonstrates how to use TensorFlow Lite Code Generator with TensorFlow Lite models. 
-- **tflite-task-api** Complete source codes of an insects recognition application. It demonstrates how to use TensorFlow Lite Task Library with TensorFlow Lite models. 
+- [**boilerplate**](./boilerplate) Project boilerplate. It includes a basic structure of a camera-based TensorFlow Lite application. Developers only need to focus on their specific inference codes without any knowledge about the rest parts of the app.
+- [**ml-model-binding**](./ml-model-binding) Complete source codes of a bird recognition application. It demonstrates how to use ML Model Binding with TensorFlow Lite models. 
+- [**codegen**](./codegen) Complete source codes of a food recognition application. It demonstrates how to use TensorFlow Lite Code Generator with TensorFlow Lite models. 
+- [**tflite-task-api**](./tflite-task-api) Complete source codes of an insects recognition application. It demonstrates how to use TensorFlow Lite Task Library with TensorFlow Lite models. 
 
 ## License
     Copyright 2021 Daily Studio.
