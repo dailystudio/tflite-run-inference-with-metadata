@@ -17,7 +17,7 @@ Before getting started, you need to assure the following things prerequisites ar
 
 ## Let's go
 
-### Initialize the project from  the boilerplate
+### Initialize the project from the boilerplate
 
 Copy the boilerplate project into your destination and import it into Android Studio.
 
@@ -105,6 +105,27 @@ Then creating classifier with these options:
             .newInstance(context, getModelOptions())
 
 ```
+
+You should close the classifier when the settings are changed. So that, the new classifier will be recreated in **analyzeFrame()** in the coming round.
+
+```Kotlin
+    override fun onInferenceSettingsChange(changePrefName: String) {
+        super.onInferenceSettingsChange(changePrefName)
+
+        when (changePrefName) {
+            InferenceSettingsPrefs.PREF_DEVICE, InferenceSettingsPrefs.PREF_NUMBER_OF_THREADS -> {
+                GlobalScope.launch (Dispatchers.IO) {
+                    synchronized(lock) {
+                        classifier?.close()
+
+                        classifier = null
+                    }
+                }
+            }
+        }
+    }
+```
+
 
 Re-launch the app, you will see:
 
