@@ -12,7 +12,7 @@ Before getting started, you need to assure the following things prerequisites ar
 > In the following steps, we assume that 
 >
 > - you clone the repository into this specific directory, **/Volumes/Workspace/gitrepos/dailystudio/tflite-run-inference-with-metadata/** 
-> - you put models in the download directory, **~/Download/** 
+> - you put models in the download directory, **/Volumes/Workspace/sandbox/tflite-example/models/** 
 > - your target working directory is **/Volumes/Workspace/sandbox/tflite-example/**
 
 ## Let's go
