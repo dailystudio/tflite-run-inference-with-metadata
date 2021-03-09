@@ -52,7 +52,12 @@ class MainActivity : AbsTFLiteModelViewerActivity<ImageInferenceInfo, List<Categ
         val itemCount = min(results.size, REPRESENTED_ITEMS_COUNT)
 
         for (i in 0 until itemCount) {
-            detectItemViews[i]?.text = results[i].label
+            var label = results[i].displayName
+            if (label.isNullOrEmpty()) {
+                label = results[i].label
+            }
+
+            detectItemViews[i]?.text = label
             detectItemValueViews[i]?.text = "%.1f%%".format(results[i].score * 100)
         }
     }
