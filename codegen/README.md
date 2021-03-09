@@ -186,7 +186,7 @@ You should close the classifier when the settings are changed. So that, the new 
 
 Re-launch the app, you will see:
 
-![](../.github/ml_model_binding_4.png)
+![](../.github/code_gen_2.png)
 
 ## Tips
 
