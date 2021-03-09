@@ -115,4 +115,4 @@ Re-launch the app, you will see:
 There are a few tips when you should notice:
 
 - The Bitmap passed into **ImageClassifierAnalyzer.analyzeFrame()** is not the original one that we get from the CameraX API. We have applied a set of pre-processing actions on the Bitmap before that. Check the implementation of **ImageClassifierAnalyzer.preProcessImage()**. 
-- **probabilityAsCategoryList** returned by inference is sorted with a score in ascending order. You should sort it before you present the top 3 three results on the UI.
+- **probabilityAsCategoryList** returned by inference is sorted with a score in ascending order. You should sort it before you present the top three results to users.
