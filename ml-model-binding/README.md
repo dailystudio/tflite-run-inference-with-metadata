@@ -6,8 +6,8 @@ For TensorFlow Lite models enhanced with metadata, developers can use Android St
 Before getting started, you need to assure the following things prerequisites are ready:
 
 - Android Studio 4.1 or later
-- Android devices (mobile phones are better) with Android 5.0+ (API Level 21)
-- TensorFlow Lite model - [bird_v1](https://tfhub.dev/google/aiy/vision/classifier/birds_V1/1)
+- An Android device (mobile phones are better) with Android 5.0+ (API Level 21)
+- TensorFlow Lite model - [birds_v1](https://tfhub.dev/google/aiy/vision/classifier/birds_V1/1)
 
 > In the following steps, we assume that 
 >
