@@ -52,6 +52,7 @@ $ tflite_codegen --model ../models/lite-model_aiy_vision_classifier_food_V1_1.tf
 ```
 
 The library project will be generated under directory **libmodel** and the structure  will like this:
+![](../.github/code_gen_1.png)
 
 ### Add dependency of the library project
 Include library project in **settings.gradle**
@@ -127,7 +128,7 @@ String probabilityLabelsFileName =
 ### Launch the app
 
 Launch the app and you will see the results,
-![](../.github/code_gen_1.png)
+![](../.github/code_gen_2.png)
 
 ### Support GPU and multi-threads inference
 Generated code allows developers to accelerate the inference through the use of delegates and the number of threads.
@@ -186,7 +187,7 @@ You should close the classifier when the settings are changed. So that, the new 
 
 Re-launch the app, you will see:
 
-![](../.github/code_gen_2.png)
+![](../.github/code_gen_3.png)
 
 ## Tips
 
