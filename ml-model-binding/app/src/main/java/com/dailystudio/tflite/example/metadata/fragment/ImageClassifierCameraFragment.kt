@@ -55,9 +55,8 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
         var categories: MutableList<Category>? = null
 
         synchronized(lock) {
-            classifier = classifier ?:
-                    LiteModelAiyVisionClassifierBirdsV13.newInstance(
-                        context, getModelOptions())
+            classifier = classifier ?: LiteModelAiyVisionClassifierBirdsV13
+                    .newInstance(context, getModelOptions())
 
             categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
                 sortByDescending {
