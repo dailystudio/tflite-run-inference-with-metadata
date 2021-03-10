@@ -48,23 +48,32 @@ Changing classifier declaration to your specific type:
 private var classifier: LiteModelAiyVisionClassifierBirdsV13? = null
 ```
 
-In **analyzeFrame()**, creating an instance of classifier and call process() to do the inference.
+In **analyzeFrame()**, creating an instance of classifier and call **process()** to do the inference.
 
 ```Kotlin
 ...
     synchronized(lock) {
-        classifier = classifier ?:
-                LiteModelAiyVisionClassifierBirdsV13.newInstance(
-                    context)
+            classifier = classifier ?: LiteModelAiyVisionClassifierBirdsV13
+                    .newInstance(context)
 
-        categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
-            sortByDescending {
-                it.score
+            val start = System.currentTimeMillis()
+
+            categories = classifier?.process(tImage)?.probabilityAsCategoryList
+
+            categories?.apply {
+                sortByDescending {
+                    it.score
+                }
             }
-        }
+
+            val end = System.currentTimeMillis()
+
+            info.inferenceTime = (end - start)
     }
 ...
 ```
+
+In the codes above, **info.inferenceTime** indicates the real inference time of the model. It will be displayed in the **Performance** section of the bottom sheet.
 
 ### Launch the app
 

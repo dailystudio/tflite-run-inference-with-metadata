@@ -60,13 +60,15 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 
             val start = System.currentTimeMillis()
 
-            categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
+            categories = classifier?.process(tImage)?.probabilityAsCategoryList
+
+            categories?.apply {
                 sortByDescending {
                     it.score
                 }
             }
 
-            val end = System.currentTimeMillis() - info.inferenceTime
+            val end = System.currentTimeMillis()
 
             info.inferenceTime = (end - start)
         }
