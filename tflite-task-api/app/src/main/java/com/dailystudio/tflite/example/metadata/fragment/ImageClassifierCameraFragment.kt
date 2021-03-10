@@ -71,9 +71,9 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
                 }
             }
 
-                val end = System.currentTimeMillis()
+            val end = System.currentTimeMillis()
 
-                info.inferenceTime = (end - start)
+            info.inferenceTime = (end - start)
         }
 
         return categories
