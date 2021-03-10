@@ -61,6 +61,8 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
                 val inputs: LiteModelFoodV1.Inputs  = it.createInputs()
                 inputs.loadImage(tImage)
 
+                val start = System.currentTimeMillis()
+
                 val outputs = classifier?.run(inputs)?.probability
                 outputs?.let { map ->
                     categories.addAll(map.toList().map { pair ->
@@ -69,6 +71,10 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
                         category.score
                     })
                 }
+
+                val end = System.currentTimeMillis()
+
+                info.inferenceTime = (end - start)
             }
         }
 

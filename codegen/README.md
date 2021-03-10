@@ -95,6 +95,8 @@ In **analyzeFrame()**, creating an instance of classifier and call run() to do t
             val inputs: LiteModelFoodV1.Inputs  = it.createInputs()
             inputs.loadImage(tImage)
 
+            val start = System.currentTimeMillis()
+
             val outputs = classifier?.run(inputs)?.probability
             outputs?.let { map ->
                 categories.addAll(map.toList().map { pair ->
@@ -103,10 +105,16 @@ In **analyzeFrame()**, creating an instance of classifier and call run() to do t
                     category.score
                 })
             }
+            
+            val end = System.currentTimeMillis()
+
+            info.inferenceTime = (end - start)
         }
     }
 ...
 ```
+
+In the codes above, **info.inferenceTime** indicates the real inference time of the model. It will be displayed in the **Performance** section of the bottom sheet.
 
 Generated library will use default label file attached in TensorFlite Lite Model. But that label is not the correct one. Labels stored in that is not human-readable. You should modify the code in library projec to use the correct one. Modify the following line in **Metadata**'s constrcutor in **LiteModelFoodV1.java**.
 
