@@ -29,9 +29,18 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
         var categories: MutableList<Category>? = null
 
         synchronized(lock) {
+            val start = System.currentTimeMillis()
             /**
              * TODO: add your classifier and inference implementation here
              */
+            val end = System.currentTimeMillis()
+
+            /**
+             * info.inferenceTime reflects the real inference time,
+             * exclude any pre-process and post-process steps. It is
+             * displayed in the Performance section of the bottom sheet.
+             */
+            info.inferenceTime = (end - start)
         }
 
         return categories
