@@ -58,11 +58,17 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
             classifier = classifier ?: LiteModelAiyVisionClassifierBirdsV13
                     .newInstance(context, getModelOptions())
 
+            val start = System.currentTimeMillis()
+
             categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
                 sortByDescending {
                     it.score
                 }
             }
+
+            val end = System.currentTimeMillis() - info.inferenceTime
+
+            info.inferenceTime = (end - start)
         }
 
         return categories
