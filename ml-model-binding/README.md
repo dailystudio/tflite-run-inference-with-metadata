@@ -53,22 +53,20 @@ In **analyzeFrame()**, creating an instance of classifier and call **process()**
 ```Kotlin
 ...
     synchronized(lock) {
-            classifier = classifier ?: LiteModelAiyVisionClassifierBirdsV13
-                    .newInstance(context)
+        classifier = classifier ?: LiteModelAiyVisionClassifierBirdsV13
+                .newInstance(context)
 
-            val start = System.currentTimeMillis()
+        val start = System.currentTimeMillis()
 
-            categories = classifier?.process(tImage)?.probabilityAsCategoryList
-
-            categories?.apply {
-                sortByDescending {
-                    it.score
-                }
+        categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
+            sortByDescending {
+                it.score
             }
+        }
 
-            val end = System.currentTimeMillis()
+        val end = System.currentTimeMillis()
 
-            info.inferenceTime = (end - start)
+        info.inferenceTime = (end - start)
     }
 ...
 ```

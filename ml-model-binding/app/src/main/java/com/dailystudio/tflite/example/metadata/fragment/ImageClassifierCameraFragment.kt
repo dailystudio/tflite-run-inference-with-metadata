@@ -60,9 +60,7 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
 
             val start = System.currentTimeMillis()
 
-            categories = classifier?.process(tImage)?.probabilityAsCategoryList
-
-            categories?.apply {
+            categories = classifier?.process(tImage)?.probabilityAsCategoryList?.apply {
                 sortByDescending {
                     it.score
                 }
