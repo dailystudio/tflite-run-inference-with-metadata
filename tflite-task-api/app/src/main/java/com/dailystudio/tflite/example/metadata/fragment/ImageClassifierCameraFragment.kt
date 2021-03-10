@@ -54,10 +54,12 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
     ): List<Category> {
         val tImage = TensorImage.fromBitmap(inferenceBitmap)
 
-        var categories: MutableList<Category> = mutableListOf()
+        val categories: MutableList<Category> = mutableListOf()
 
         synchronized(lock) {
             classifier = classifier ?: createModel(context)
+
+            val start = System.currentTimeMillis()
 
             val classifications = classifier?.classify(tImage)
 
@@ -68,6 +70,10 @@ class ImageClassifierAnalyzer(rotation: Int, lensFacing: Int)
                     category.score
                 }
             }
+
+                val end = System.currentTimeMillis()
+
+                info.inferenceTime = (end - start)
         }
 
         return categories

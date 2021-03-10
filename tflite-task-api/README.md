@@ -72,6 +72,9 @@ And call classify() to do the inference.
     synchronized(lock) {
         classifier = classifier ?: createModel(context)
 
+        val start = System.currentTimeMillis()
+
+
         val classifications = classifier?.classify(tImage)
 
         classifications?.let {
@@ -81,9 +84,16 @@ And call classify() to do the inference.
                 category.score
             }
         }
+        
+        val end = System.currentTimeMillis()
+
+        info.inferenceTime = (end - start)
     }
 ...
 ```
+
+In the codes above, **info.inferenceTime** indicates the real inference time of the model. It will be displayed in the **Performance** section of the bottom sheet.
+
 
 ### Launch the app
 
